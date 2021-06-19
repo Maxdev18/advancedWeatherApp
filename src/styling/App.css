@@ -1,0 +1,49 @@
+/*Global*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+}
+
+/*Navbar*/
+.nav-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 60px;
+    position: relative;
+}
+
+.nav-title {
+    grid-column-start: 2;
+}
+
+.nav-sibling {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-search-bar {
+    width: 70%;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 20%;
+    color: black;
+    border-bottom: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+}

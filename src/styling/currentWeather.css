@@ -1,0 +1,6 @@
+/*containers*/
+.current-weather-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
