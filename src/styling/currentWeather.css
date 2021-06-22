@@ -2,5 +2,56 @@
 .current-weather-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    height: 30vh;
+    width: 50%;
+}
+
+.current-temp-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 90%;
+    background-color: white;
+    border: 0px;
+    border-radius: 30px;
+}
+
+.temp-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.quick-weather-info {
+    display: flex-end;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+/*Text and temps*/
+.current-location {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.current-temp {
+    margin-left: 20px;
+}
+
+.high-low-temp {
+    font-weight: 500;
+}
+
+.weather-status {
+    font-weight: 200;
+    float: right;
+
+}/*Hourly forecast styling*/
+.hourly-forecast-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
