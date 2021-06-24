@@ -1,7 +1,26 @@
 /*Containers*/
-
+.hour-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+}
 
 .hourly-weather {
+    display: flex;
+    justify-content: space-evenly;
     width: 100%;
     height: 100px;
+}
+
+.hour-forecast {
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+}
+
+.hour-temp {
+    font-size: 1.5em;
+    margin-top: 24px;
 }

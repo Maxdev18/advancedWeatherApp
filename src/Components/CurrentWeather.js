@@ -1,5 +1,5 @@
 import React from 'react';
-import HourlyForecast from '../Components/hourlyForecast';
+import HourlyForecast from './HourlyForecast';
 import '../styling/currentWeather.css';
 
 const CurrentWeather = (props) => {
@@ -15,10 +15,9 @@ const CurrentWeather = (props) => {
                         <p className="weather-status">{props.weatherData.weatherStatus}</p>
                     </div>
                 </div>
-            </div>
-            
-            <div className="hourly-forecast-container">
-                <HourlyForecast weatherData={props.weatherData}/>
+                <div className="hourly-forecast-container">
+                    <HourlyForecast weatherData={props.weatherData}/>
+                </div>
             </div>
         </div>
     )
