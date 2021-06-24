@@ -49,25 +49,21 @@ function App() {
   let [apiWeatherData, setApiWeatherData] = useState(weatherData);
   let [apiCity, setApiCity] = useState(apiInfo.city);
 
-  function updateCity() {
-    setApiCity(inputCity.current.value);
-  }
-
   let fetchWeather = async () => {
     //Reset search bar
+    setApiCity(inputCity.current.value);
     inputCity.current.value = "";
     inputCity.current.focus();
 
     //Just city API url information
     const API_KEY = '7b6a24eefe1c484589a203928211306';
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${apiInfo.city}&days=${apiInfo.cnt}&aqi=no&alerts=no`;
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${apiCity}&days=${apiInfo.cnt}&aqi=no&alerts=no`;
     
     try {
       const res = await fetch(url);
       let data = await res.json();
       console.log(data);
       weatherData = {
-        state: data.location.region,
         temp: data.current.temp_f + "°F",
         humidity: data.current.humidity + "%",
         rain: data.forecast.forecastday[0].day.daily_chance_of_rain,
@@ -110,7 +106,6 @@ function App() {
         <div className="search-bar-container">
           <input className="nav-sibling nav-search-bar" ref={inputCity} type="search" placeholder='Enter city...' />
           <button className="search-city" onClick={()=>{
-            updateCity();
             fetchWeather();
             }}>Search</button>
         </div>
