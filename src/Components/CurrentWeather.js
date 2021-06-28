@@ -7,7 +7,7 @@ const CurrentWeather = (props) => {
     return(
         <div className="current-weather-container">
             <div className="current-temp-container">
-                <h3 className="current-location">{props.location}</h3>
+                <h3 className="current-location">{props.weatherData.location}</h3>
                 <div className="temp-container">
                     <h1 className="current-temp">{props.weatherData.temp}</h1>
                     <div className="quick-weather-info">

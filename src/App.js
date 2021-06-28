@@ -5,7 +5,7 @@ import './styling/App.css';
 function App() {
   //API necessary information values
   let apiInfo = {
-    city: 'Erie',
+    city: '',
     cnt: 3
   }
 
@@ -13,7 +13,6 @@ function App() {
   //Wanted to use API with latitude and longitude to get instant data but this website doesn't support it
   //...So you have to make initial fake/dummy text values
   let weatherData = {
-    state: "Pennsylvania",
     temp: "76°F",
     humidity: "40%",
     rain: "17%",
@@ -49,68 +48,58 @@ function App() {
   let [apiWeatherData, setApiWeatherData] = useState(weatherData);
   let [apiCity, setApiCity] = useState(apiInfo.city);
 
-  let fetchWeather = async () => {
-    //Reset search bar
-    setApiCity(inputCity.current.value);
-    inputCity.current.value = "";
-    inputCity.current.focus();
+    let fetchWeather = async () => {
+      //Reset search bar
+      inputCity.current.value = '';
+      inputCity.current.focus();
 
-    //Just city API url information
-    const API_KEY = '7b6a24eefe1c484589a203928211306';
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${apiCity}&days=${apiInfo.cnt}&aqi=no&alerts=no`;
-    
-    try {
-      const res = await fetch(url);
-      let data = await res.json();
-      console.log(data);
-      weatherData = {
-        temp: data.current.temp_f + "°F",
-        humidity: data.current.humidity + "%",
-        rain: data.forecast.forecastday[0].day.daily_chance_of_rain,
-        highTemp: data.forecast.forecastday[0].day.maxtemp_f + "°",
-        lowTemp: data.forecast.forecastday[0].day.mintemp_f + "°",
-        weatherStatus: data.current.condition.text,
-        sunrise: data.forecast.forecastday[0].astro.sunrise,
-        sunset: data.forecast.forecastday[0].astro.sunrise,
-        wind: data.current.wind_mph + "mph",
-        wind_dir: data.current.wind_dir,
-        hourlyForecast: data.forecast.forecastday[0].hour,
-        threeDayForecast: {
-          currentDay: {
-            highTemp: data.forecast.forecastday[0].day.maxtemp_f,
-            lowTemp: data.forecast.forecastday[0].day.mintemp_f,
-            chanceOfRain: data.forecast.forecastday[0].day.daily_chance_of_rain
-          },
-          nextDay: {
-            highTemp: data.forecast.forecastday[1].day.maxtemp_f,
-            lowTemp: data.forecast.forecastday[1].day.mintemp_f,
-            chanceOfRain: data.forecast.forecastday[1].day.daily_chance_of_rain
-          },
-          afterNextDay: {
-            highTemp: data.forecast.forecastday[2].day.maxtemp_f,
-            lowTemp: data.forecast.forecastday[2].day.mintemp_f,
-            chanceOfRain: data.forecast.forecastday[2].day.daily_chance_of_rain
+      //Just city API url information
+      const API_KEY = '7b6a24eefe1c484589a203928211306';
+      const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${apiCity}&days=${apiInfo.cnt}&aqi=no&alerts=no`;
+      
+      try {
+        const res = await fetch(url);
+        let data = await res.json();
+      
+        weatherData = {
+          location: data.location.name,
+          temp: data.current.temp_f + "°F",
+          humidity: data.current.humidity + "%",
+          rain: data.forecast.forecastday[0].day.daily_chance_of_rain,
+          highTemp: data.forecast.forecastday[0].day.maxtemp_f + "°",
+          lowTemp: data.forecast.forecastday[0].day.mintemp_f + "°",
+          weatherStatus: data.current.condition.text,
+          sunrise: data.forecast.forecastday[0].astro.sunrise,
+          sunset: data.forecast.forecastday[0].astro.sunrise,
+          wind: data.current.wind_mph + "mph",
+          wind_dir: data.current.wind_dir,
+          hourlyForecast: data.forecast.forecastday[0].hour,
+          threeDayForecast: {
+            currentDay: {
+              highTemp: data.forecast.forecastday[0].day.maxtemp_f,
+              lowTemp: data.forecast.forecastday[0].day.mintemp_f,
+              chanceOfRain: data.forecast.forecastday[0].day.daily_chance_of_rain
+            }
           }
         }
-      }
-      setApiWeatherData(weatherData);
-    } catch(err) {
-        console.log(err);
-      }
-  }
+        setApiWeatherData(weatherData);
+      } catch(err) {
+          console.log(err);
+        }
+    }
   
   return (
     <div className="App">
       <header className="nav-container">
         <h1 className="nav-title nav-sibling">Weather</h1>
         <div className="search-bar-container">
-          <input className="nav-sibling nav-search-bar" ref={inputCity} type="search" placeholder='Enter city...' />
+          <input className="nav-sibling nav-search-bar" ref={inputCity} type="search" placeholder='Enter city...' onChange={(e)=> setApiCity(e.target.value)} />
           <button className="search-city" onClick={()=>{
             fetchWeather();
             }}>Search</button>
         </div>
       </header>
-      <CurrentWeather weatherData={apiWeatherData} location={apiCity} />
+      <CurrentWeather weatherData={apiWeatherData} />
     </div>
   )
 }
